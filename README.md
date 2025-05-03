@@ -38,12 +38,4 @@ An Arduino-powered autonomous vehicle that navigates in a controlled arena using
 Install dependencies:
 ```bash
 pip install opencv-python numpy pyserial
-autonomous_navigation_car/
-│
-├── main.py                # Detect ArUco, plan path, send commands
-├── path_planning.py       # A* path planning module
-├── serial_comm.py         # Serial/Bluetooth command sender
-├── arena_map.png          # (Optional) reference arena map
-├── arduino/
-│   └── robot_controller.ino  # Arduino motor controller code
-└── README.md
+

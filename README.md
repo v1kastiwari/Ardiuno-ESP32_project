@@ -1,72 +1,49 @@
-# 🤖 Autonomous Navigation Car using Overhead Camera & ArUco Markers
+# 🛣️ Autonomous Navigation Car with Overhead Camera & ArUco Markers
 
-A vision-based autonomous robot system that uses **overhead camera tracking**, **ArUco marker localization**, and **path planning algorithms** to navigate in a predefined arena. All the logic is handled by a single Python script (`Ardinuo.py`), making it simple and easy to deploy.
-
----
-
-## 📂 Project Structure
-
-├── ARD_code/ # Arduino motor driver code (if any)
-├── ESP_code/ # ESP-related communication code (optional)
-├── Ardinuo.py # 🧠 Main control script: detection + planning + communication
-├── path_plan.ipynb # Notebook for standalone path planning experiments
-├── plot_point.py # Utility to visualize or debug points
-├── arena_image1.jpg # Arena reference image
-├── README.md # This file
-
+An Arduino-powered autonomous vehicle that navigates in a controlled arena using an **overhead camera**, **ArUco marker-based localization**, and **path planning algorithms**. The vehicle receives motion instructions via serial/Bluetooth from a Python-based control system running on a host computer or Raspberry Pi.
 
 ---
 
-## ⚙️ Features
+## 🚀 Features
 
-- 📸 Overhead camera tracks real-time robot and goal positions via ArUco markers
-- 🔁 All-in-one Python script (`Ardinuo.py`) handles:
-  - Marker detection
-  - Robot and goal localization
-  - Grid creation and path planning
-  - Command encoding and transmission to robot
-- 🧭 Path planning using A* or custom algorithms
-- 🔌 Communicates with robot over serial/Bluetooth
+- 📷 Overhead view of entire arena using a single USB camera
+- 🧠 Localization of robot and goal using ArUco markers
+- 🗺️ Path planning with A* or Dijkstra algorithm
+- 📡 Wireless/serial communication from host to Arduino
+- ⚙️ Simple and modular Arduino motor control
 
 ---
 
-## 🛠 Requirements
+## 🧰 Hardware Requirements
+
+| Component            | Purpose                                |
+|---------------------|----------------------------------------|
+| Arduino Uno         | Core controller for robot              |
+| USB Camera          | Mounted above arena for full visibility|
+| Raspberry Pi / PC   | Runs image processing and path planning|
+| ArUco Markers       | Placed on robot and goal for tracking  |
+| L298N Motor Driver  | Drives the robot's motors              |
+| Robot Chassis       | Mobile platform                        |
+| HC-05 Bluetooth (opt)| For wireless command transfer         |
+
+---
+
+## 🧑‍💻 Software Requirements
 
 - Python 3.7+
-- OpenCV (`cv2`)
+- OpenCV
 - NumPy
-- PySerial
-- ArUco markers (printed and placed on robot/arena)
+- PySerial (for communication)
 
 Install dependencies:
 ```bash
 pip install opencv-python numpy pyserial
-
-🚗 How to Run
-Connect your Arduino via USB or Bluetooth.
-
-Ensure the camera is mounted overhead with a clear view of the arena.
-
-Launch the main script:
-
-bash
-Copy
-Edit
-python Ardinuo.py
-The robot will localize itself and the goal, plan the path, and start moving!
-
-🧠 Logic Overview
-cv2.aruco detects markers on robot and target
-
-Arena is divided into grid cells based on marker size
-
-Shortest path is computed
-
-Commands are sent to Arduino to follow the path
-
-🧪 Extras
-path_plan.ipynb: Visualizes and tests different path planning strategies
-
-plot_point.py: Plots coordinates and marker points for debugging
-
-arena_image1.jpg: Reference arena image used for mapping
+autonomous_navigation_car/
+│
+├── main.py                # Detect ArUco, plan path, send commands
+├── path_planning.py       # A* path planning module
+├── serial_comm.py         # Serial/Bluetooth command sender
+├── arena_map.png          # (Optional) reference arena map
+├── arduino/
+│   └── robot_controller.ino  # Arduino motor controller code
+└── README.md
